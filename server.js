@@ -3,6 +3,8 @@
 var express = require('express');
 var fs      = require('fs');
 
+var routes = require('./routes/index');
+var songs = require('./routes/songs');
 
 /**
  *  Define the sample application.
@@ -92,6 +94,7 @@ var SampleApp = function() {
     /**
      *  Create the routing table entries + handlers for the application.
      */
+    /*
     self.createRoutes = function() {
         self.routes = { };
 
@@ -105,7 +108,7 @@ var SampleApp = function() {
             res.send(self.cache_get('index.html') );
         };
     };
-
+    */
 
     /**
      *  Initialize the server (express) and create the routes and register
@@ -120,6 +123,33 @@ var SampleApp = function() {
             self.app.get(r, self.routes[r]);
         }
     };
+    
+    self.customInitialize = function() {
+        var app = self.app;
+
+        // view engine setup
+        app.set('views', path.join(__dirname, 'views'));
+        app.set('view engine', 'ejs');
+
+        // uncomment after placing your favicon in /public
+        //app.use(favicon(__dirname + '/public/favicon.ico'));
+        /*
+        app.use(logger('dev'));
+        app.use(bodyParser.json());
+        app.use(bodyParser.urlencoded({ extended: false }));
+        app.use(cookieParser());*/
+        app.use(express.static(path.join(__dirname, 'public')));
+
+        app.use('/', routes);
+        app.use('/songs', songs);
+
+        // catch 404 and forward to error handler
+        app.use(function(req, res, next) {
+            var err = new Error('Not Found');
+            err.status = 404;
+            next(err);
+        });
+    }
 
 
     /**
@@ -132,6 +162,8 @@ var SampleApp = function() {
 
         // Create the express server and routes.
         self.initializeServer();
+        
+        self.customInitialize();
     };
 
 
