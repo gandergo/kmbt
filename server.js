@@ -3,6 +3,7 @@
 var express = require('express');
 var fs      = require('fs');
 
+var path = require('path');
 var routes = require('./routes/index');
 var songs = require('./routes/songs');
 
@@ -115,8 +116,9 @@ var SampleApp = function() {
      *  the handlers.
      */
     self.initializeServer = function() {
-        self.createRoutes();
-        self.app = express.createServer();
+        //self.createRoutes();
+        //self.app = express.createServer();
+        self.app = express();
 
         //  Add handlers for the app (from the routes).
         for (var r in self.routes) {
