@@ -144,6 +144,25 @@ var SampleApp = function() {
 
         app.use('/', routes);
         app.use('/songs', songs);
+        
+        // Database connections
+        var url = 'mongodb://localhost/kmbApp';
+
+        // if OPENSHIFT env variables are present, use the available connection info:
+        if (process.env.OPENSHIFT_MONGODB_DB_URL) {
+            url = process.env.OPENSHIFT_MONGODB_DB_URL +
+            process.env.OPENSHIFT_APP_NAME;
+        }
+
+        var mongoose = require('mongoose');
+        mongoose.connect(url, function(err) {
+            if(err) {
+                console.log('connection error', err);
+            } else {
+                console.log('connection successful');
+            }
+        });
+
 
         // catch 404 and forward to error handler
         app.use(function(req, res, next) {
@@ -151,6 +170,32 @@ var SampleApp = function() {
             err.status = 404;
             next(err);
         });
+        
+        /*
+        // error handlers
+
+        // development error handler
+        // will print stacktrace
+        if (app.get('env') === 'development') {
+            app.use(function(err, req, res, next) {
+                res.status(err.status || 500);
+                res.render('error', {
+                    message: err.message,
+                    error: err
+                });
+            });
+        }
+
+        // production error handler
+        // no stacktraces leaked to user
+        app.use(function(err, req, res, next) {
+            res.status(err.status || 500);
+            res.render('error', {
+                message: err.message,
+                error: {}
+            });
+        });
+        */
     }
 
 
