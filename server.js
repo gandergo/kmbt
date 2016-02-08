@@ -7,6 +7,9 @@ var path = require('path');
 var routes = require('./routes/index');
 var songs = require('./routes/songs');
 
+var passport = require('passport')
+  , FacebookStrategy = require('passport-facebook').Strategy;
+
 /**
  *  Define the sample application.
  */
@@ -132,6 +135,27 @@ var SampleApp = function() {
         // view engine setup
         app.set('views', path.join(__dirname, 'views'));
         app.set('view engine', 'ejs');
+        
+        //passport init
+        passport.use(new FacebookStrategy({
+                clientID: '382800951750696',
+                clientSecret: '887a9cf6f817ab78d822881647d32447',
+                callbackURL: "https://kmb-kmbgroup.rhcloud.com/auth/facebook/callback"
+            },
+            function(accessToken, refreshToken, profile, done) {
+                /*
+                User.findOrCreate(..., function(err, user) {
+                if (err) { return done(err); }
+                done(null, user);
+                });
+                */
+                return done(null, true);
+            }
+        ));
+        
+        app.use(express.session({ secret: 'keyboard cat' }));
+        app.use(passport.initialize());
+        app.use(passport.session());
 
         // uncomment after placing your favicon in /public
         //app.use(favicon(__dirname + '/public/favicon.ico'));
