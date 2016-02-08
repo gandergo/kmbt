@@ -130,12 +130,8 @@ var SampleApp = function() {
         }
     };
     
-    self.customInitialize = function() {
+    self.passportInitialize = function() {
         var app = self.app;
-
-        // view engine setup
-        app.set('views', path.join(__dirname, 'views'));
-        app.set('view engine', 'ejs');
         
         //passport init
         passport.use(new FacebookStrategy({
@@ -157,6 +153,29 @@ var SampleApp = function() {
         app.use(session({ secret: 'keyboard cat' }));
         app.use(passport.initialize());
         app.use(passport.session());
+        
+        // Redirect the user to Facebook for authentication.  When complete,
+        // Facebook will redirect the user back to the application at
+        //     /auth/facebook/callback
+        app.get('/auth/facebook', passport.authenticate('facebook'));
+
+        // Facebook will redirect the user to this URL after approval.  Finish the
+        // authentication process by attempting to obtain an access token.  If
+        // access was granted, the user will be logged in.  Otherwise,
+        // authentication has failed.
+        app.get('/auth/facebook/callback',
+        passport.authenticate('facebook', { successRedirect: '/',
+                                            failureRedirect: '/login' }));
+    };
+    
+    self.customInitialize = function() {
+        var app = self.app;
+
+        // view engine setup
+        app.set('views', path.join(__dirname, 'views'));
+        app.set('view engine', 'ejs');
+        
+        self.passportInitialize();
 
         // uncomment after placing your favicon in /public
         //app.use(favicon(__dirname + '/public/favicon.ico'));
