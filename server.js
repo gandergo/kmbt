@@ -1,6 +1,7 @@
 #!/bin/env node
 //  OpenShift sample Node application
 var express = require('express');
+var session = require('express-session')
 var fs      = require('fs');
 
 var path = require('path');
