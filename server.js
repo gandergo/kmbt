@@ -166,6 +166,16 @@ var SampleApp = function() {
         app.get('/auth/facebook/callback',
         passport.authenticate('facebook', { successRedirect: '/',
                                             failureRedirect: '/login' }));
+                                            
+        //module.exports = function(req, res, next) {
+        app.use(function(req, res, next) {
+            if (req.isAuthenticated()) {
+                return next();
+            }
+            else{
+                return res.redirect('/auth/facebook');
+            }
+        });
     };
     
     self.customInitialize = function() {
