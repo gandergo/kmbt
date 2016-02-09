@@ -179,6 +179,8 @@ var SampleApp = function() {
                                 //facebook: profile._json
                                 
                             });
+                            console.log('profile id' + profile.id);
+                            console.log(user);
                             user.save(function(err) {
                                 if (err) console.log(err);
                                 return done(err, user);
