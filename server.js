@@ -140,9 +140,10 @@ var SampleApp = function() {
                 clientID: '382800951750696',
                 clientSecret: '887a9cf6f817ab78d822881647d32447',
                 callbackURL: "https://kmb-kmbgroup.rhcloud.com/auth/facebook/callback",
-                passReqToCallback : true,
-                profileFields: ['id', 'emails', 'name'] 
+                //passReqToCallback : true,
+                //profileFields: ['id', 'emails', 'name'] 
                 //profileFields: ['emails'] 
+                profileFields: ['id']
             },
             function(accessToken, refreshToken, profile, done) {
                 
@@ -161,7 +162,7 @@ var SampleApp = function() {
                         if (!user) {
                             user = new User({
                                 name: profile.displayName,
-                                email: profile.emails[0].value,
+                                //email: profile.emails[0].value,
                                 //username: profile.username,
                                 fbid: profile.id,
                                 createDate: new Date(),
