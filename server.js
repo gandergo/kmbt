@@ -4,6 +4,7 @@ var express = require('express');
 var session = require('express-session')
 var fs      = require('fs');
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
 
 var path = require('path');
 var routes = require('./routes/index');
@@ -236,6 +237,8 @@ var SampleApp = function() {
         app.set('view engine', 'ejs')
         
         app.use(bodyParser.json());
+        app.use(bodyParser.urlencoded({ extended: false }));
+        app.use(cookieParser());
         
         self.passportInitialize();
 
