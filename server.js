@@ -148,7 +148,7 @@ var SampleApp = function() {
                 profileFields: ['id', 'displayName', 'email']
             },
             function(accessToken, refreshToken, profile, done) {
-                
+                console.log(profile);
                 //User.findOrCreate(..., function(err, user) {
                 //if (err) { return done(err); }
                 //done(null, user);
@@ -163,8 +163,8 @@ var SampleApp = function() {
                         //No user was found... so create a new user with values from Facebook (all the profile. stuff)
                         if (!user) {
                             user = new User({
-                                email: profile.email,
                                 name: profile.displayName,
+                                email: profile.email,
                                 //email: profile.emails[0].value,
                                 //username: profile.username,
                                 fbid: profile.id
