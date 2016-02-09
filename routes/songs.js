@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
 
 /* POST /todos */
 router.post('/', function(req, res, next) {
-  Song.create(req.body, function (err, post) {
+  Song.create(_.merge(req.body, {uid: req.user.id}), function (err, post) {
     if (err) return next(err);
     res.json(post);
   });

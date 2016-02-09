@@ -6,8 +6,6 @@ var UserSchema = new mongoose.Schema({
   facebook: String,
   //username: String,
   //email: String,
-  createDate: Date,
-  updateDate: Date,
-});
+}, {timestamps: true});
 
 module.exports = mongoose.model('User', UserSchema);

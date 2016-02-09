@@ -140,7 +140,7 @@ var SampleApp = function() {
                 clientID: '382800951750696',
                 clientSecret: '887a9cf6f817ab78d822881647d32447',
                 callbackURL: "https://kmb-kmbgroup.rhcloud.com/auth/facebook/callback",
-                //passReqToCallback : true,
+                passReqToCallback : true,
                 //profileFields: ['id', 'emails', 'name'] 
                 //profileFields: ['emails'] 
                 profileFields: ['id', 'displayName', 'emails']
@@ -166,9 +166,9 @@ var SampleApp = function() {
                                 //username: profile.username,
                                 //fbid: profile.id,
                                 fbid: profile._json.id,
-                                facebook: profile._json,
-                                createDate: new Date(),
-                                updateDate: new Date()
+                                facebook: profile._json
+                                //createDate: new Date(),
+                                //updateDate: new Date()
                                 //provider: 'facebook',
                                 //now in the future searching on User.findOne({'facebook.id': profile.id } will match because of this next line
                                 //facebook: profile._json
