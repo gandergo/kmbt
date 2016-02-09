@@ -4,7 +4,7 @@ var UserSchema = new mongoose.Schema({
   fbId: String,
   name: String,
   username: String,
-  //email: String,
+  email: String,
   createDate: Date,
   updateDate: Date,
 });
