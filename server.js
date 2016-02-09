@@ -178,7 +178,11 @@ var SampleApp = function() {
                                 //facebook: profile._json
                                 
                             });
-                            user.save(function(err) {
+                            /*user.save(function(err) {
+                                if (err) console.log(err);
+                                return done(err, user);
+                            });*/
+                            User.create(user, function (err, post) {
                                 if (err) console.log(err);
                                 return done(err, user);
                             });
