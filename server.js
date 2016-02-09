@@ -8,7 +8,7 @@ var path = require('path');
 var routes = require('./routes/index');
 var songs = require('./routes/songs');
 
-var User = require('../models/User.js');
+var User = require('./models/User.js');
 
 var passport = require('passport')
   , FacebookStrategy = require('passport-facebook').Strategy;
