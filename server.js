@@ -163,11 +163,11 @@ var SampleApp = function() {
                         if (!user) {
                             user = new User({
                                 name: profile.displayName,
-                                //email: profile.emails[0].value,
+                                email: profile.emails[0].value,
                                 //username: profile.username,
-                                //fbid: profile.id,
-                                fbid: profile._json.id,
-                                facebook: profile._json
+                                fbid: profile.id,
+                                //fbid: profile._json.id,
+                                //facebook: profile._json
                                 //createDate: new Date(),
                                 //updateDate: new Date()
                                 //provider: 'facebook',
@@ -206,7 +206,7 @@ var SampleApp = function() {
         // Redirect the user to Facebook for authentication.  When complete,
         // Facebook will redirect the user back to the application at
         //     /auth/facebook/callback
-        app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'basic_info']}));
+        app.get('/auth/facebook', passport.authenticate('facebook', { authType: 'rerequest', scope: ['email', 'basic_info']}));
         //app.get('/auth/facebook', passport.authenticate('facebook'));
 
         // Facebook will redirect the user to this URL after approval.  Finish the
