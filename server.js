@@ -165,10 +165,10 @@ var SampleApp = function() {
                             console.log(profile);
                             user = new User({
                                 name: profile.displayName,
-                                email: profile.email,
+                                email: profile.emails[0].value,
+                                fbid: profile.id
                                 //email: profile.emails[0].value,
                                 //username: profile.username,
-                                fbid: profile.id
                                 //facebook: profile.email
                                 //fbid: profile._json.id,
                                 //facebook: profile._json
