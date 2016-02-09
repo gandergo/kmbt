@@ -145,7 +145,7 @@ var SampleApp = function() {
                 //passReqToCallback : true,
                 //profileFields: ['id', 'emails', 'name'] 
                 //profileFields: ['emails'] 
-                profileFields: ['id', 'displayName', 'emails', 'email']
+                profileFields: ['id', 'displayName', 'email']
             },
             function(accessToken, refreshToken, profile, done) {
                 
@@ -164,10 +164,11 @@ var SampleApp = function() {
                         if (!user) {
                             user = new User({
                                 name: profile.displayName,
-                                email: profile.emails[0].value,
+                                email: profile.email,
+                                //email: profile.emails[0].value,
                                 //username: profile.username,
-                                fbid: profile.id,
-                                facebook: profile.email
+                                fbid: profile.id
+                                //facebook: profile.email
                                 //fbid: profile._json.id,
                                 //facebook: profile._json
                                 //createDate: new Date(),
