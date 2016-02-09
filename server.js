@@ -145,7 +145,8 @@ var SampleApp = function() {
                 //passReqToCallback : true,
                 //profileFields: ['id', 'emails', 'name'] 
                 //profileFields: ['emails'] 
-                profileFields: ['id', 'displayName', 'email']
+                profileFields: ['id', 'displayName']
+                //profileFields: ['id', 'displayName', 'email']
             },
             function(accessToken, refreshToken, profile, done) {
                 //User.findOrCreate(..., function(err, user) {
@@ -155,7 +156,7 @@ var SampleApp = function() {
                 
                 //http://stackoverflow.com/questions/20431049/what-is-function-user-findorcreate-doing-and-when-is-it-called-in-passport
                 User.findOne({
-                    'fbid': profile.id }, function(err, user) {
+                    'fbId': profile.id }, function(err, user) {
                         if (err) {
                             console.log(err);
                             return done(err);
@@ -165,8 +166,7 @@ var SampleApp = function() {
                             console.log(profile);
                             user = new User({
                                 name: profile.displayName,
-                                email: profile.emails[0].value,
-                                fbid: profile.id
+                                fbId: profile.id
                                 //email: profile.emails[0].value,
                                 //username: profile.username,
                                 //facebook: profile.email
@@ -216,8 +216,8 @@ var SampleApp = function() {
         // Redirect the user to Facebook for authentication.  When complete,
         // Facebook will redirect the user back to the application at
         //     /auth/facebook/callback
-        app.get('/auth/facebook', passport.authenticate('facebook', { authType: 'rerequest', scope: ['email']}));
-        //app.get('/auth/facebook', passport.authenticate('facebook'));
+        //app.get('/auth/facebook', passport.authenticate('facebook', { authType: 'rerequest', scope: ['email']}));
+        app.get('/auth/facebook', passport.authenticate('facebook'));
 
         // Facebook will redirect the user to this URL after approval.  Finish the
         // authentication process by attempting to obtain an access token.  If
