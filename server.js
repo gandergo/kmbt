@@ -139,7 +139,9 @@ var SampleApp = function() {
         passport.use(new FacebookStrategy({
                 clientID: '382800951750696',
                 clientSecret: '887a9cf6f817ab78d822881647d32447',
-                callbackURL: "https://kmb-kmbgroup.rhcloud.com/auth/facebook/callback"
+                callbackURL: "https://kmb-kmbgroup.rhcloud.com/auth/facebook/callback",
+                passReqToCallback : true,
+                profileFields: ['id', 'emails', 'name'] 
             },
             function(accessToken, refreshToken, profile, done) {
                 
