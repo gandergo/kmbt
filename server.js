@@ -3,6 +3,7 @@
 var express = require('express');
 var session = require('express-session')
 var fs      = require('fs');
+var bodyParser = require('body-parser');
 
 var path = require('path');
 var routes = require('./routes/index');
@@ -232,7 +233,9 @@ var SampleApp = function() {
 
         // view engine setup
         app.set('views', path.join(__dirname, 'views'));
-        app.set('view engine', 'ejs');
+        app.set('view engine', 'ejs')
+        
+        app.use(bodyParser.json());
         
         self.passportInitialize();
 
