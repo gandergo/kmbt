@@ -22,7 +22,8 @@ var SongSchema = new mongoose.Schema({
 
 // ref: http://stackoverflow.com/questions/30743565/how-to-save-userid-in-mongoose-hook
 SongSchema.virtual('uid').set(function (userId) {
-  if (this.isNew()) {
+  //if (this.isNew()) {
+  if(!this.createUid) {
     this.createUid = this.updateUid = userId;
   } else {
     this.updateUid = userId;
