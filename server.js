@@ -148,7 +148,6 @@ var SampleApp = function() {
                 profileFields: ['id', 'displayName', 'email']
             },
             function(accessToken, refreshToken, profile, done) {
-                console.log(profile);
                 //User.findOrCreate(..., function(err, user) {
                 //if (err) { return done(err); }
                 //done(null, user);
@@ -158,10 +157,12 @@ var SampleApp = function() {
                 User.findOne({
                     'fbid': profile.id }, function(err, user) {
                         if (err) {
+                            console.log(err);
                             return done(err);
                         }
                         //No user was found... so create a new user with values from Facebook (all the profile. stuff)
                         if (!user) {
+                            console.log(profile);
                             user = new User({
                                 name: profile.displayName,
                                 email: profile.email,
@@ -178,14 +179,14 @@ var SampleApp = function() {
                                 //facebook: profile._json
                                 
                             });
-                            /*user.save(function(err) {
-                                if (err) console.log(err);
-                                return done(err, user);
-                            });*/
-                            User.create(user, function (err, post) {
+                            user.save(function(err) {
                                 if (err) console.log(err);
                                 return done(err, user);
                             });
+                            /*User.create(user, function (err, post) {
+                                if (err) console.log(err);
+                                return done(err, user);
+                            });*/
                         } else {
                             //found user. Return
                             return done(err, user);
