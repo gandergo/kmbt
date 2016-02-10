@@ -31,10 +31,10 @@ SongSchema.virtual('uid').set(function (userId) {
     this.updateUid = userId;
     
     //Update create_uid of comments if it is null
-    this.comments.forEach(function(el)
+    /*this.comments.forEach(function(el)
     {
         if(!el.createUid)   el.createUid = userId; 
-    });
+    });*/
   }
 });
 

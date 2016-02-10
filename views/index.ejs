@@ -52,7 +52,7 @@
       New Video Url: <input type="text" ng-model="newVideoUrl"><button ng-click="saveVideoUrl()">Add</button>
       
       <div ng-repeat="comment in song.comments">
-          Comment by: <span>{{comment.uid}}</span>
+          Comment by: <span>{{comment.createUid}}</span>
           Content: <input type="text" ng-model="comment.body"><button ng-click="updateComment($index)">Edit</button><button ng-click="deleteComment($index)">Delete</button>
       </div> 
       <div ng-hide="song.comments.length">No Comment</div>     
