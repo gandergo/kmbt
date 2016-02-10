@@ -222,6 +222,7 @@
           
           
           $scope.updateSong = function(){
+              console.log($scope.song);
               var song = $scope.song;
               Songs.update({id: song._id}, song);  
           };
