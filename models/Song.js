@@ -18,7 +18,8 @@ var SongSchema = new mongoose.Schema({
   arrangedDate: Date,
   tags: [String],
   createUid: String,
-  updateUid: String
+  updateUid: String,
+  comments: [{createUid: String, body: String, createdAt: Date}]
 }, {timestamps: true});
 
 // ref: http://stackoverflow.com/questions/30743565/how-to-save-userid-in-mongoose-hook
