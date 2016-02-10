@@ -267,7 +267,7 @@
               var song = $scope.song;
               var commentObj = {};
               commentObj.body = $scope.newComment;
-              song.comments.push($scope.newComment);
+              song.comments.push(commentObj);
               Songs.update({id: song._id}, song);
           };
           
