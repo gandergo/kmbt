@@ -14,7 +14,8 @@ router.get('/', function(req, res, next) {
 
 /* POST /todos */
 router.post('/', function(req, res, next) {
-  req.body.uid = req.user.id;
+  req.body.createUid = req.user.id;
+  req.body.updateUid = req.user.id;
   Song.create(req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
