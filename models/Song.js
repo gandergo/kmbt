@@ -5,19 +5,20 @@ var SongSchema = new mongoose.Schema({
   status: {type: String, enum: ['Lyrics', 'Arragement', 'Publish', 'Done']},
   lyrics: String,
   descriptions: String,
+  followUp: String,
   oldLyrics: [String],
-  composer: String,
-  lyricist: String,
+  songwriter: [String],
+  lyricswriter: [String],
+  singer: [String],
   audioUrls: [String],
   videoUrls: [String],
-  gatherings: [Number],
+  gatherings: Number,
   composeDate: Date,
   lyricsDate: Date,
   arrangedDate: Date,
+  tags: [String],
   createUid: String,
-  createDate: Date,
-  updateUid: String,
-  updateDate: Date,
+  updateUid: String
 }, {timestamps: true});
 
 // ref: http://stackoverflow.com/questions/30743565/how-to-save-userid-in-mongoose-hook
