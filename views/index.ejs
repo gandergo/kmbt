@@ -50,7 +50,7 @@
       New Audio Url: <input type="text" ng-model="newAudioUrl"><button ng-click="saveAudioUrl()">Add</button>
       <div ng-repeat="videoUrl in song.videoUrls">
           <iframe id="ytplayer" type="text/html" width="640" height="390"
-            src="{{'http://www.youtube.com/embed/' + videoUrl.split('watch?v=')[1] + '?autoplay=1'}}"
+            src="{{'http://www.youtube.com/embed/' + videoUrl.split('watch?v=')[1] + '?autoplay=1' | trustAsResourceUrl}}"
             frameborder="0"/>
           videoUrl: <input type="text" ng-model="videoUrl"><button ng-click="updateVideoUrl($index)">Edit</button><button ng-click="deleteVideoUrl($index)">Delete</button>
       </div> 
