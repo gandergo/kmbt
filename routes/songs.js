@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
   Song.find(function (err, todos) {
     if (err) return next(err);
     res.json(todos);
-  });
+  }).sort({ _id: 1 });      //http://stackoverflow.com/questions/25091017/mongodb-finds-returning-document-order
 });
 
 /* POST /todos */
