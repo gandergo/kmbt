@@ -225,8 +225,9 @@
               //alert('test');
               //var song = $scope.song;
               alert(JSON.stringify(song));
+              var id = song._id;
               delete(song._id);
-              Songs.update({id: song._id}, song);  
+              Songs.update({id: id}, song);  
           };
           
           //Audio
