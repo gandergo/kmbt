@@ -36,7 +36,7 @@
     <script type="text/ng-template" id="/songDetails.html">
       <h1>{{ song.name }}</h1>
       status: <select ng-model="song.status" ng-options="status for status in statusList"></select><br/>
-      lyrics: <textarea style="width:70%;height:200px">{{ song.lyrics }}</textarea>
+      lyrics: <textarea ng-model="song.lyrics" style="width:70%;height:200px"></textarea>
       <br />
       <div ng-repeat="audioUrl in song.audioUrls">
           <audio src="{{audioUrl + '?raw=1' | trustAsResourceUrl}}"  controls autoplay loop></audio>
@@ -58,7 +58,7 @@
       
       <div ng-repeat="comment in song.comments">
           Comment by: <span>{{comment.createUid}}</span>
-          Content: <input type="text" ng-model="comment.body"><button ng-click="updateComment($index)">Edit</button><button ng-click="deleteComment($index)">Delete</button>
+          Content: <textarea ng-model="comment.body"></textarea><button ng-click="updateComment($index)">Edit</button><button ng-click="deleteComment($index)">Delete</button>
       </div> 
       <div ng-hide="song.comments.length">No Comment</div>     
       New Comment: <input type="text" ng-model="newComment"><button ng-click="saveComment()">Add</button>
