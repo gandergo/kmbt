@@ -43,7 +43,7 @@
           <audio src="{{audioUrl + '?raw=1' | trustAsResourceUrl}}"  controls autoplay loop></audio>
           <a href="{{audioUrl + '?dl=1'}}">Download</a>
           <br />
-          audioUrl: <input type="text" ng-model="audioUrl"><button ng-click="updateAudioUrl($index)">Edit</button><button ng-click="deleteAudioUrl($index)">Delete</button>
+          audioUrl: <input type="text" ng-model="song.audioUrls[$index]"><button ng-click="updateAudioUrl($index)">Edit</button><button ng-click="deleteAudioUrl($index)">Delete</button>
       </div> 
       <div ng-hide="song.audioUrls.length">No audio</div>     
       New Audio Url: <input type="text" ng-model="newAudioUrl"><button ng-click="saveAudioUrl()">Add</button>
@@ -52,7 +52,7 @@
           <iframe id="ytplayer" type="text/html" width="640" height="390"
             src="{{'https://www.youtube.com/embed/' + videoUrl.split('watch?v=')[1] | trustAsResourceUrl}}"
             frameborder="0"></iframe><!-- + '?autoplay=1' -->
-          videoUrl: <input type="text" ng-model="videoUrl"><button ng-click="updateVideoUrl($index)">Edit</button><button ng-click="deleteVideoUrl($index)">Delete</button>
+          videoUrl: <input type="text" ng-model="song.videoUrls[$index]"><button ng-click="updateVideoUrl($index)">Edit</button><button ng-click="deleteVideoUrl($index)">Delete</button>
       </div> 
       <div ng-hide="song.videoUrls.length">No video</div>     
       New Video Url: <input type="text" ng-model="newVideoUrl"><button ng-click="saveVideoUrl()">Add</button>
@@ -223,8 +223,6 @@
           
           $scope.updateSong = function(){
               alert('test');
-              console.log('scope ');
-              console.log('scope: ' + $scope);
               var song = $scope.song;
               Songs.update({id: song._id}, song);  
           };
