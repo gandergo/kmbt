@@ -222,9 +222,8 @@
           
           
           $scope.updateSong = function(){
-              //console.log($scope.song);         
               console.log('scope: ' + $scope);
-              //var song = $scope.song;
+              var song = $scope.song;
               Songs.update({id: song._id}, song);  
           };
           
