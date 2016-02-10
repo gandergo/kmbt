@@ -61,7 +61,7 @@
           Content: <textarea ng-model="comment.body"></textarea><button ng-click="updateComment($index)">Edit</button><button ng-click="deleteComment($index)">Delete</button>
       </div> 
       <div ng-hide="song.comments.length">No Comment</div>     
-      New Comment: <input type="text" ng-model="newComment"><button ng-click="saveComment()">Add</button>
+      New Comment: <textarea ng-model="newComment"></textarea><button ng-click="saveComment()">Add</button>
       <button ng-click="updateSong(song)">Update</button>
     </script>
 
@@ -225,6 +225,7 @@
               //alert('test');
               //var song = $scope.song;
               alert(JSON.stringify(song));
+              delete(song._id);
               Songs.update({id: song._id}, song);  
           };
           
