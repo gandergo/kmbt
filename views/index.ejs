@@ -35,6 +35,7 @@
 
     <script type="text/ng-template" id="/songDetails.html">
       <h1>{{ song.name }}</h1>
+      <button ng-click="updateSong()">Update</button>
       status: <select ng-model="song.status" ng-options="status for status in statusList"></select><br/>
       lyrics: <textarea ng-model="song.lyrics" style="width:70%;height:200px"></textarea>
       <br />
@@ -62,7 +63,6 @@
       </div> 
       <div ng-hide="song.comments.length">No Comment</div>     
       New Comment: <textarea ng-model="newComment"></textarea><button ng-click="saveComment()">Add</button>
-      <button ng-click="updateSong(song)">Update</button>
     </script>
 
     <script>
@@ -221,10 +221,9 @@
             );
           
           
-          $scope.updateSong = function(song){
+          $scope.updateSong = function(){
               //alert('test');
-              //var song = $scope.song;
-              alert(JSON.stringify(song));
+              var song = $scope.song;
               var id = song._id;
               delete(song._id);
               Songs.update({id: id}, song);  
