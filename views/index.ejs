@@ -227,6 +227,8 @@
               var song = $scope.song;
               song.audioUrls.push($scope.newAudioUrl);
               Songs.update({id: song._id}, song);
+              
+              $scope.newAudioUrl = "";
           };
           
           $scope.updateAudioUrl = function(index) {
@@ -247,6 +249,8 @@
               var song = $scope.song;
               song.videoUrls.push($scope.newVideoUrl);
               Songs.update({id: song._id}, song);
+              
+              $scope.newVideoUrl = "";
           };
           
           $scope.updateVideoUrl = function(index) {
@@ -269,6 +273,8 @@
               commentObj.body = $scope.newComment;
               song.comments.push(commentObj);
               Songs.update({id: song._id}, song);
+              
+              $scope.newComment = "";
           };
           
           $scope.updateComment = function(index) {
