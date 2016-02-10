@@ -48,6 +48,14 @@
       </div> 
       <div ng-hide="song.audioUrls.length">No audio</div>     
       New Audio Url: <input type="text" ng-model="newAudioUrl"><button ng-click="saveAudioUrl()">Add</button>
+      <div ng-repeat="videoUrl in song.videoUrls">
+          <iframe id="ytplayer" type="text/html" width="640" height="390"
+            src="{{'http://www.youtube.com/embed/' + videoUrl.split('watch?v=')[1] + '?autoplay=1'}}"
+            frameborder="0"/>
+          videoUrl: <input type="text" ng-model="videoUrl"><button ng-click="updateVideoUrl($index)">Edit</button><button ng-click="deleteVideoUrl($index)">Delete</button>
+      </div> 
+      <div ng-hide="song.videoUrls.length">No video</div>     
+      New Video Url: <input type="text" ng-model="newVideoUrl"><button ng-click="saveVideoUrl()">Add</button>
     </script>
 
     <script>
@@ -229,6 +237,26 @@
               song.audioUrls.splice(index, 1);
               Songs.update({id: song._id}, song);
           }
+          
+          $scope.saveVideoUrl = function(){
+              if(!$scope.newVideoUrl || $scope.newVideoUrl.length < 1) return;
+              
+              var song = $scope.song;
+              song.videoUrls.push($scope.newVideoUrl);
+              Songs.update({id: song._id}, song);
+          };
+          
+          $scope.updateVideoUrl = function(index) {
+              var song = $scope.song;
+              Songs.update({id: song._id}, song);
+          };
+          
+          $scope.deleteVideoUrl = function(index){
+              var song = $scope.song;
+              song.videoUrls.splice(index, 1);
+              Songs.update({id: song._id}, song);
+          }
+          
           //alert($scope.song.audioUrls[0]);
           
           //if(Songs[$routeParams.id].audioUrls == undefined)
