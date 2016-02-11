@@ -32,12 +32,6 @@ router.get('/:id', function(req, res, next) {
 /* PUT /todos/:id */
 router.put('/:id', function(req, res, next) {
   req.body.uid = req.user.fbId;
-  
-  req.body.comments.forEach(function(el)
-    {
-        if(!el.createUid)   el.createUid = req.user.fbId; 
-    });
-  
   delete(req.body._id);     //http://stackoverflow.com/questions/24103966/mongoerror-mod-on-id-not-allowed
   Song.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
     if (err) return next(err);
