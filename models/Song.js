@@ -26,11 +26,11 @@ var SongSchema = new mongoose.Schema({
 SongSchema.virtual('uid').set(function (userId) {
   //if (this.isNew()) {
   if(!this.createUid) {
+    console.log('user_id: ' + userId);
     this.createUid = this.updateUid = userId;
   } else {
     this.updateUid = userId;
     
-    console.log('user_id: ' + userId);
     //Update create_uid of comments if it is null
     this.comments.forEach(function(el)
     {
