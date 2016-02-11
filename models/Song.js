@@ -30,6 +30,7 @@ SongSchema.virtual('uid').set(function (userId) {
   } else {
     this.updateUid = userId;
     
+    console.log('user_id: ' + userId);
     //Update create_uid of comments if it is null
     this.comments.forEach(function(el)
     {
