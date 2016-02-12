@@ -10,7 +10,7 @@ var SongSchema = new mongoose.Schema({
   songwriter: [String],
   lyricswriter: [String],
   singer: [String],
-  audioUrls: [String],
+  audioUrls: [{url: String, description: String, sequence: Number}],
   videoUrls: [String],
   gatherings: Number,
   composeDate: Date,

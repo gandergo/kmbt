@@ -40,10 +40,13 @@
       lyrics: <textarea ng-model="song.lyrics" style="width:70%;height:200px"></textarea>
       <br />
       <div ng-repeat="audioUrl in song.audioUrls">
-          <audio src="{{audioUrl + '?raw=1' | trustAsResourceUrl}}"  controls autoplay loop></audio>
-          <a href="{{audioUrl + '?dl=1'}}">Download</a>
+          <audio src="{{audioUrl.url + '?raw=1' | trustAsResourceUrl}}"  controls autoplay loop></audio>
+          <a href="{{audioUrl.url + '?dl=1'}}">Download</a>
           <br />
-          audioUrl: <input type="text" ng-model="song.audioUrls[$index]"><button ng-click="updateAudioUrl($index)">Edit</button><button ng-click="deleteAudioUrl($index)">Delete</button>
+          audioUrl: <input type="text" ng-model="audioUrl.url">
+          description: <input type="text" ng-model="audioUrl.description">
+          sequence: <input type="text" ng-model="audioUrl.sequence">
+          <button ng-click="updateAudioUrl($index)">Edit</button><button ng-click="deleteAudioUrl($index)">Delete</button>
       </div> 
       <div ng-hide="song.audioUrls.length">No audio</div>     
       New Audio Url: <input type="text" ng-model="newAudioUrl"><button ng-click="saveAudioUrl()">Add</button>
@@ -235,7 +238,7 @@
               if(!$scope.newAudioUrl || $scope.newAudioUrl.length < 1) return;
               
               var song = $scope.song;
-              song.audioUrls.push($scope.newAudioUrl);
+              song.audioUrls.push({url:$scope.newAudioUrl});
               Songs.update({id: song._id}, song);
               
               $scope.newAudioUrl = "";
