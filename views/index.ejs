@@ -39,10 +39,11 @@
       status: <select ng-model="song.status" ng-options="status for status in statusList"></select><br/>
       lyrics: <textarea ng-model="song.lyrics" style="width:70%;height:200px"></textarea>
       <br />
-      <input type="text" ng-model="song.folderUrl">
+      <iframe style="width:70%;" src="{{song.folderUrl | trustAsResourceUrl}}"></iframe>
+      Folder: <input type="text" ng-model="song.folderUrl">
       <br />
       <div ng-repeat="audioUrl in song.audioUrls">
-          <audio src="{{audioUrl.url + '?raw=1' | trustAsResourceUrl}}"  controls autoplay loop></audio>
+          <audio src="{{audioUrl.url + '?raw=1' | trustAsResourceUrl}}"  controls loop></audio><!--autoplay -->
           <a href="{{audioUrl.url + '?dl=1'}}">Download</a>
           <br />
           audioUrl: <input type="text" ng-model="audioUrl.url">
