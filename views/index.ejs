@@ -43,9 +43,10 @@
         Sorry, your browser does not support HTML5 audio.
     </audio>
     <ul id="playlist">
+        <li class="active"><a href="http://www.archive.org/download/bolero_69/Bolero.mp3">Ravel Bolero</a></li>
         <li ng-repeat="song in songs | filter: search">
           <a href="{{song.audioUrls.filter(function(audioUrl){audioUrl.sequence == 1})[0]}}">{{song.name}}</a>
-          <a href="#/{{song._id}}">Edit</a>
+          <!--<a href="#/{{song._id}}">Edit</a>-->
         </li>
         <!--<li class="active"><a href="http://www.archive.org/download/bolero_69/Bolero.mp3">Ravel Bolero</a></li>
         <li><a href="http://www.archive.org/download/MoonlightSonata_755/Beethoven-MoonlightSonata.mp3">Moonlight Sonata - Beethoven</a></li>
