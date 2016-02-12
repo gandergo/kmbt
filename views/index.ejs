@@ -31,12 +31,7 @@
       New Song <input type="text" ng-model="newSong"><button ng-click="save()">Create</button>
       Search: <input type="text" ng-model="search.name">
       <select ng-model="" ng-options="status as status for status in statusList"></select>
-      <ul>
-        <li ng-repeat="song in songs | filter: search">
-          <!--<input type="text" ng-model="song.status">-->
-          <a href="#/{{song._id}}">{{song.name}}</a>
-        </li>
-      </ul>
+      
       
     <audio id="audio" preload="auto" tabindex="0" controls="" type="audio/mpeg">
         <source type="audio/mp3" src="http://www.archive.org/download/bolero_69/Bolero.mp3">
