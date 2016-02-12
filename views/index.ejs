@@ -59,7 +59,7 @@
       
       <div ng-repeat="comment in song.comments">
           Comment by: <span ng-bind="comment.createUid"></span>
-          Content: <textarea ng-model="comment.body"></textarea><button ng-click="updateComment($index)">Edit</button><button ng-click="deleteComment($index)">Delete</button>
+          Content: <textarea ng-model="comment.body" readonly></textarea><!--<button ng-click="updateComment($index)">Edit</button>--><button ng-click="deleteComment($index)">Delete</button>
       </div> 
       <div ng-hide="song.comments.length">No Comment</div>     
       New Comment: <textarea ng-model="newComment"></textarea><button ng-click="saveComment()">Add</button>
