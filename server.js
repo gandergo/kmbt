@@ -163,6 +163,7 @@ var SampleApp = function() {
                         }
                         //No user was found... so create a new user with values from Facebook (all the profile. stuff)
                         if (!user) {
+                            /*No longer create user after all fb user has been added
                             console.log(profile);
                             user = new User({
                                 name: profile.displayName,
@@ -185,6 +186,8 @@ var SampleApp = function() {
                                 if (err) console.log(err);
                                 return done(err, user);
                             });
+                            */
+                            
                             /*User.create(user, function (err, post) {
                                 if (err) console.log(err);
                                 return done(err, user);
