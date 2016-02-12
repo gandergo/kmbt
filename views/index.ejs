@@ -3,6 +3,12 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>
+    #playlist,audio{background:#666;width:400px;padding:20px;}
+    .active a{color:#5DB0E6;text-decoration:none;}
+    li a{color:#eeeedd;background:#333;padding:5px;display:block;}
+    li a:hover{text-decoration:none;}    
+    </style>
   </head>
   <body>
     <h1><%= title %></h1>
@@ -31,6 +37,23 @@
           <a href="#/{{song._id}}">{{song.name}}</a>
         </li>
       </ul>
+      
+    <$scope.audio id="audio" preload="auto" tabindex="0" controls="" type="audio/mpeg">
+        <source type="audio/mp3" src="http://www.archive.org/download/bolero_69/Bolero.mp3">
+        Sorry, your browser does not support HTML5 audio.
+    </audio>
+    <ul id="playlist">
+        <li ng-repeat="song in songs | filter: search">
+          <a href="{{song.audioUrls.filter(function(audioUrl){audioUrl.sequence == 1})[0]}}">{{song.name}}</a>
+          <a href="#/{{song._id}}">Edit</a>
+        </li>
+        <!--<li class="active"><a href="http://www.archive.org/download/bolero_69/Bolero.mp3">Ravel Bolero</a></li>
+        <li><a href="http://www.archive.org/download/MoonlightSonata_755/Beethoven-MoonlightSonata.mp3">Moonlight Sonata - Beethoven</a></li>
+        <li><a href="http://www.archive.org/download/CanonInD_261/CanoninD.mp3">Canon in D Pachabel</a></li>
+        <li><a href="http://www.archive.org/download/PatrikbkarlChamberSymph/PatrikbkarlChamberSymph_vbr_mp3.zip">patrikbkarl chamber symph</a></li>
+        -->
+    </ul>
+      
     </script>
 
     <script type="text/ng-template" id="/songDetails.html">
@@ -194,6 +217,47 @@
                 $scope.songs[index] = angular.copy($scope.editing[index]);
                 $scope.editing[index] = false;
             }
+          
+          //http://jsfiddle.net/WsXX3/33/
+          $scope.audio = null;
+          $scope.playlist = null;
+          $scope.tracks = null;
+          $scope.current = null;
+          
+          var init = function(){
+            $scope.current = 0;
+            $scope.audio = angular.element('audio');
+            $scope.playlist = angular.element('#playlist');
+            $scope.tracks = $scope.playlist.find('li a');
+            len = $scope.tracks.length - 1;
+            $scope.audio[0].volume = .10;
+            $scope.audio[0].play();
+            $scope.playlist.find('a').click(function(e){
+                e.preventDefault();
+                link = angular.element(this);
+                $scope.current = link.parent().index();
+                run(link, $scope.audio[0]);
+            });
+            $scope.audio[0].addEventListener('ended',function(e){
+                $scope.current++;
+                if($scope.current == len){
+                    $scope.current = 0;
+                    link = $scope.playlist.find('a')[0];
+                }else{
+                    link = $scope.playlist.find('a')[$scope.current];    
+                }
+                run(angular.element(link),$scope.audio[0]);
+            });
+        }
+        var run = function (link, player){
+                player.src = link.attr('href');
+                par = link.parent();
+                par.addClass('active').siblings().removeClass('active');
+                $scope.audio[0].load();
+                $scope.audio[0].play();
+        }
+        
+        init();
 
         }])
 
