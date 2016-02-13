@@ -31,7 +31,7 @@
       New Song <input type="text" ng-model="newSong"><button ng-click="save()">Create</button>
       Search: <input type="text" ng-model="search.name">
       <select ng-model="" ng-options="status as status for status in statusList"></select>
-      <ul>
+      <ul style="display:none">
         <li ng-repeat="song in songs | filter: search">
           <!--<input type="text" ng-model="song.status">-->
           <a href="#/{{song._id}}">{{song.name}}</a>
@@ -42,12 +42,12 @@
         <source type="audio/mp3" src="{{songs[activeIndex].audioUrls[0].url | trustAsResourceUrl}}">
         Sorry, your browser does not support HTML5 audio.
     </audio>-->
-    <audio src="{{songs[activeIndex].audioUrls.filter(function(audioUrl){return audioUrl.sequence == 1})[0].url + '?raw=1' | trustAsResourceUrl}}"  controls></audio>
+    <audio src="{{songs[activeIndex].(audioUrls | filter: {sequence: 1})[0].url + '?raw=1' | trustAsResourceUrl}}"  controls></audio>
     <ul id="playlist">
         <!--<li class="active"><a href="http://www.archive.org/download/bolero_69/Bolero.mp3">Ravel Bolero</a></li>-->
         <li ng-repeat="song in songs | filter: search">
-          <a href="{{song.audioUrls.filter(function(audioUrl){return audioUrl.sequence == 1})[0].url}}" ng:click="audioLinkClicked($index, $event)">{{song.name}}</a>
-          <!--<a href="#/{{song._id}}">Edit</a>-->
+          <a href="{{song.(audioUrls | filter: {sequence: 1})[0].url}}" ng:click="audioLinkClicked($index, $event)">{{song.name}}</a>
+          <a href="#/{{song._id}}">Edit</a>
         </li>
         <!--<li class="active"><a href="http://www.archive.org/download/bolero_69/Bolero.mp3">Ravel Bolero</a></li>
         <li><a href="http://www.archive.org/download/MoonlightSonata_755/Beethoven-MoonlightSonata.mp3">Moonlight Sonata - Beethoven</a></li>
