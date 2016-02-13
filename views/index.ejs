@@ -45,7 +45,7 @@
     <ul id="playlist">
         <li class="active"><a href="http://www.archive.org/download/bolero_69/Bolero.mp3">Ravel Bolero</a></li>
         <li ng-repeat="song in songs | filter: search">
-          <a href="{{song.audioUrls.filter(function(audioUrl){audioUrl.sequence == 1})[0]}}">{{song.name}}</a>
+          <a href="{{song.audioUrls.filter(function(audioUrl){audioUrl.sequence == 1})[0].url}}" ng:click="audioLinkClicked($index, $event)">{{song.name}}</a>
           <!--<a href="#/{{song._id}}">Edit</a>-->
         </li>
         <!--<li class="active"><a href="http://www.archive.org/download/bolero_69/Bolero.mp3">Ravel Bolero</a></li>
@@ -220,12 +220,40 @@
             }
           
           //http://jsfiddle.net/WsXX3/33/
-          $scope.audio = null;
+          /*$scope.audio = null;
           $scope.playlist = null;
           $scope.tracks = null;
-          $scope.current = null;
+          $scope.current = null;*/
           
-          var init = function(){
+          function initPlayer(){
+              $scope.activeIndex = 0;
+              $scope.audio = angular.element('audio');
+              len = $scope.songs.length;
+              
+              angular.element('audio')[0].addEventListener('ended',function(e){
+                $scope.activeIndex++;
+                if($scope.activeIndex == len){
+                    $scope.activeIndex = 0;
+                    link = $scope.playlist.find('a')[0];
+                }else{
+                    link = $scope.playlist.find('a')[$scope.current];    
+                }
+                playAudio(scope.current);
+              });
+          };
+          
+          function playAudio(index)
+          {
+              $scope.audioSrc = $scope.songs[index].audioUrls.filter(function(audioUrl){audioUrl.sequence == 1})[0].url
+              $scope.activeIndex = index;
+          }
+          
+          $scope.audioLinkClicked = function(index, event){
+              event.preventDefault();
+              playAudio(index);
+          }
+          
+          /*function init(){
             $scope.current = 0;
             $scope.audio = angular.element('audio');
             $scope.playlist = angular.element('#playlist');
@@ -250,15 +278,15 @@
                 run(angular.element(link),$scope.audio[0]);
             });
         }
-        var run = function (link, player){
+        function run (link, player){
                 player.src = link.attr('href');
                 par = link.parent();
                 par.addClass('active').siblings().removeClass('active');
                 $scope.audio[0].load();
                 $scope.audio[0].play();
-        }
+        }*/
         
-        init();
+        initPlayer();
 
         }])
 
