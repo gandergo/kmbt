@@ -38,10 +38,11 @@
         </li>
       </ul>
       
-    <audio id="audio" preload="auto" tabindex="0" controls="" type="audio/mpeg">
+    <!--<audio id="audio" preload="auto" tabindex="0" controls="" type="audio/mpeg">
         <source type="audio/mp3" src="{{songs[activeIndex].audioUrls[0].url | trustAsResourceUrl}}">
         Sorry, your browser does not support HTML5 audio.
-    </audio>
+    </audio>-->
+    <audio ng-src="songs[activeIndex].audioUrls[0].url | trustAsResourceUrl"  controls></audio>
     <ul id="playlist">
         <!--<li class="active"><a href="http://www.archive.org/download/bolero_69/Bolero.mp3">Ravel Bolero</a></li>-->
         <li ng-repeat="song in songs | filter: search">
