@@ -36,7 +36,7 @@
       Song Writer: <select ng-model="songwriter" ng-options="member.name as member.fbId for member in memberList"></select>
       
       <ul style="display:none">
-        <li ng-repeat="song in songs | filter: search | hasSongWriter(songwriter)">
+        <li ng-repeat="song in songs | filter: search | hasSongWriter:songwriter">
           <!--<input type="text" ng-model="song.status">-->
           <a href="#/{{song._id}}">{{song.name}}</a>
         </li>
