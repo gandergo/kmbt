@@ -118,7 +118,7 @@
             return function(songs, member)
             {
                 return songs.filter(function(song){
-                    return (song.songwriter.indexOf(member) > -1);
+                    return member == "" || (song.songwriter.indexOf(member) > -1);
                     });
             };
         })
