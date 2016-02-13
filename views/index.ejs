@@ -147,7 +147,7 @@
         }])
         
         .factory('MemberList', function(){
-           return [{name: "Chris", fbId: "509846744"}, {name: "Germing", fbId: "564940779"}, {name: "Iris", fbId: "516014768"}, {name: "NgauNam", fbId: "659440430"}, {name: "Tommy", fbId: "660440533"}]; 
+           return [{name: "", fbId: ""}, {name: "Chris", fbId: "509846744"}, {name: "Germing", fbId: "564940779"}, {name: "Iris", fbId: "516014768"}, {name: "NgauNam", fbId: "659440430"}, {name: "Tommy", fbId: "660440533"}]; 
         })
         
         
@@ -166,7 +166,7 @@
                     // this callback will be called asynchronously
                     // when the response is available.
                     //console.log('todos: ', data );
-                    response.data.unshift("");
+                    response.data.unshift(null);
                     $scope.statusList = response.data;
                 }, function errorCallback(response) {
                     // called asynchronously if an error occurs
@@ -333,7 +333,7 @@
                     // this callback will be called asynchronously
                     // when the response is available.
                     //console.log('todos: ', data );
-                    response.data.unshift("");
+                    response.data.unshift(null);
                     $scope.statusList = response.data
                 }, function errorCallback(response) {
                     // called asynchronously if an error occurs
