@@ -36,7 +36,7 @@
       Song Writer: <select ng-model="songwriter" ng-options="member.name as member.fbId for member in memberList"></select>
       
       <ul style="display:none">
-        <li ng-repeat="song in songs | filter: search | hasSongWriter:songwriter">
+        <li ng-repeat="song in songs | filter: search | filter:hasSongWriter()">
           <!--<input type="text" ng-model="song.status">-->
           <a href="#/{{song._id}}">{{song.name}}</a>
         </li>
@@ -113,7 +113,7 @@
                     return $sce.trustAsResourceUrl(val);
                 };
             }])
-        
+        /*
         .filter('hasSongWriter', function(){
             return function(songs, member)
             {
@@ -121,7 +121,7 @@
                     return (song.songwriter.indexOf(member) > -1);
                     });
             };
-        })
+        })*/
       
         //---------------
         // Services
@@ -318,7 +318,15 @@
                 $scope.audio[0].play();
         }*/
         
-        initPlayer();
+            initPlayer();
+
+            //ref: http://stackoverflow.com/questions/11753321/passing-arguments-to-angularjs-filters
+            $scope.hasSongwriter = function()
+            {
+                return function(song) {
+                return (song.songwriter.indexOf($scope.songwriter) > -1);
+                };
+            }
 
         }])
 
