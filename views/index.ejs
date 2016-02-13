@@ -78,7 +78,7 @@
       Folder: <input type="text" ng-model="song.folderUrl">
       <br />
       <div ng-repeat="audioUrl in song.audioUrls">
-          <audio src="{{audioUrl.url + '?raw=1' | trustAsResourceUrl}}"  controls loop></audio><!--autoplay -->
+          <audio ng-src="{{audioUrl.url + '?raw=1' | trustAsResourceUrl}}"  controls loop></audio><!--autoplay -->
           <a href="{{audioUrl.url + '?dl=1'}}">Download</a>
           <br />
           audioUrl: <input type="text" ng-model="audioUrl.url">
