@@ -3,12 +3,13 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <!--<style>
+    <style>
     #playlist,audio{background:#666;width:400px;padding:20px;}
     .active a{color:#5DB0E6;text-decoration:none;}
-    li a{color:#eeeedd;background:#333;padding:5px;display:block;}
+    /*li a{color:#eeeedd;background:#333;padding:5px;display:block;}*/
+    li a{color:#eeeedd;background:#333;padding:5px;}
     li a:hover{text-decoration:none;}    
-    </style>-->
+    </style>
   </head>
   <body>
     <h1><%= title %></h1>
@@ -43,7 +44,7 @@
         <source type="audio/mp3" src="{{songs[activeIndex].audioUrls[0].url | trustAsResourceUrl}}">
         Sorry, your browser does not support HTML5 audio.
     </audio>-->
-    <audio ng-src="{{(songs[activeIndex].audioUrls | filter: {sequence: 1})[0].url + '?raw=1' | trustAsResourceUrl}}"  controls></audio>
+    <audio id="audio" ng-src="{{(songs[activeIndex].audioUrls | filter: {sequence: 1})[0].url + '?raw=1' | trustAsResourceUrl}}"  controls></audio>
     <ul id="playlist">
         <!--<li class="active"><a href="http://www.archive.org/download/bolero_69/Bolero.mp3">Ravel Bolero</a></li>-->
         <li ng-repeat="song in songs | filter: search">
