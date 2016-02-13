@@ -227,10 +227,10 @@
           
           function initPlayer(){
               $scope.activeIndex = 0;
-              $scope.audio = angular.element('audio');
+              $scope.audio = document.getElementsByTagName('audio');
               len = $scope.songs.length;
               
-              angular.element('audio')[0].addEventListener('ended',function(e){
+              document.getElementsByTagName('audio')[0].addEventListener('ended',function(e){
                 $scope.activeIndex++;
                 if($scope.activeIndex == len){
                     $scope.activeIndex = 0;
