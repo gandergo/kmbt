@@ -324,6 +324,7 @@
             //http://stackoverflow.com/questions/18792039/angularjs-multiple-filter-with-custom-filter-function
             $scope.hasSongwriter = function(song)
             {
+                alert('test');
                 return (song.songwriter.indexOf($scope.songwriter) > -1);
             }
 
