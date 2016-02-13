@@ -48,7 +48,7 @@
     <ul id="playlist">
         <!--<li class="active"><a href="http://www.archive.org/download/bolero_69/Bolero.mp3">Ravel Bolero</a></li>-->
         <li ng-repeat="song in songs | filter: search">
-          <div ng-class="{$index == activeIndex ? 'active' : ''}">
+          <div ng-class="{{$index == activeIndex ? 'active' : ''}}">
           <a href="{{(song.audioUrls | filter: {sequence: 1})[0].url}}" ng:click="audioLinkClicked($index, $event)">{{song.name}}</a>
           <a href="#/{{song._id}}">Edit</a>
           </div>
