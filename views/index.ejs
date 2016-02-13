@@ -39,7 +39,7 @@
       </ul>
       
     <audio id="audio" preload="auto" tabindex="0" controls="" type="audio/mpeg">
-        <source type="audio/mp3" ng-src="songs[activeIndex].audioUrls[0].url | trustAsResourceUrl">
+        <source type="audio/mp3" src="{{songs[activeIndex].audioUrls[0].url | trustAsResourceUrl}}">
         Sorry, your browser does not support HTML5 audio.
     </audio>
     <ul id="playlist">
