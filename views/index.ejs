@@ -114,10 +114,13 @@
                 };
             }])
         
-        .filter('hasSongWriter', function(songs, member){
-            return songs.filter(function(song){
+        .filter('hasSongWriter', function(){
+            return function(songs, member)
+            {
+                songs.filter(function(song){
                 return (song.songwriter.indexOf(member) > -1);
-            });
+                });
+            };
         })
       
         //---------------
