@@ -42,11 +42,11 @@
         <source type="audio/mp3" src="{{songs[activeIndex].audioUrls[0].url | trustAsResourceUrl}}">
         Sorry, your browser does not support HTML5 audio.
     </audio>-->
-    <audio src="{{songs[activeIndex].(audioUrls | filter: {sequence: 1})[0].url + '?raw=1' | trustAsResourceUrl}}"  controls></audio>
+    <audio src="{{(songs[activeIndex].audioUrls | filter: {sequence: 1})[0].url + '?raw=1' | trustAsResourceUrl}}"  controls></audio>
     <ul id="playlist">
         <!--<li class="active"><a href="http://www.archive.org/download/bolero_69/Bolero.mp3">Ravel Bolero</a></li>-->
         <li ng-repeat="song in songs | filter: search">
-          <a href="{{song.(audioUrls | filter: {sequence: 1})[0].url}}" ng:click="audioLinkClicked($index, $event)">{{song.name}}</a>
+          <a href="{{(song.audioUrls | filter: {sequence: 1})[0].url}}" ng:click="audioLinkClicked($index, $event)">{{song.name}}</a>
           <a href="#/{{song._id}}">Edit</a>
         </li>
         <!--<li class="active"><a href="http://www.archive.org/download/bolero_69/Bolero.mp3">Ravel Bolero</a></li>
