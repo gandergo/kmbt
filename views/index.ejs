@@ -30,6 +30,7 @@
 
     <!-- Template -->
     <script type="text/ng-template" id="/songs.html">
+      <button ng-click="refresh()">Refresh</button>
       Search: <br />
       Name: <input type="text" ng-model="search.name">
       Status: <select ng-model="search.status" ng-options="status as status for status in statusList"></select>
@@ -61,7 +62,7 @@
         <li><a href="http://www.archive.org/download/CanonInD_261/CanoninD.mp3">Canon in D Pachabel</a></li>
         <li><a href="http://www.archive.org/download/PatrikbkarlChamberSymph/PatrikbkarlChamberSymph_vbr_mp3.zip">patrikbkarl chamber symph</a></li>
         -->
-    </ul
+    </ul>
     
     New Song: <input type="text" ng-model="newSong"><button ng-click="save()">Create</button>
       
@@ -69,7 +70,7 @@
 
     <script type="text/ng-template" id="/songDetails.html">
       <h1>{{ song.name }}</h1><input type="text" ng-model="song.name">
-      <button ng-click="updateSong()">Update</button>
+      <button ng-click="updateSong()">Update</button><a href="#">Back</a>
       status: <select ng-model="song.status" ng-options="status for status in statusList"></select><br/>
       lyrics: <textarea ng-model="song.lyrics" style="width:70%;height:200px"></textarea>
       <br />
@@ -324,10 +325,13 @@
 
             //ref: http://stackoverflow.com/questions/11753321/passing-arguments-to-angularjs-filters
             //http://stackoverflow.com/questions/18792039/angularjs-multiple-filter-with-custom-filter-function
-            $scope.hasSongwriter = function(song)
-            {
+            $scope.hasSongwriter = function(song){
                 return (song.songwriter.indexOf($scope.songwriter) > -1);
             }
+            
+            $scope.refresh = function(){
+                $scope.$apply();
+            };
 
         }])
 
