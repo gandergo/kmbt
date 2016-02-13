@@ -36,7 +36,7 @@
       Song Writer: <select ng-model="songwriter" ng-options="member.fbId as member.name for member in memberList"></select>
       
       <ul style="display:none">
-        <li ng-repeat="song in songs | filter:hasSongWriter">
+        <li ng-repeat="song in songs | filter: search | filter:hasSongWriter">
           <!--<input type="text" ng-model="song.status">-->
           <a href="#/{{song._id}}">{{song.name}}</a>
         </li>
@@ -319,6 +319,8 @@
         }*/
         
             initPlayer();
+
+            $scope.songwriter = "";
 
             //ref: http://stackoverflow.com/questions/11753321/passing-arguments-to-angularjs-filters
             //http://stackoverflow.com/questions/18792039/angularjs-multiple-filter-with-custom-filter-function
