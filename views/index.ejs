@@ -39,11 +39,11 @@
       </ul>
       
     <audio id="audio" preload="auto" tabindex="0" controls="" type="audio/mpeg">
-        <source type="audio/mp3" src="http://www.archive.org/download/bolero_69/Bolero.mp3">
+        <source type="audio/mp3" src="songs[activeIndex].audioUrls[0].url">
         Sorry, your browser does not support HTML5 audio.
     </audio>
     <ul id="playlist">
-        <li class="active"><a href="http://www.archive.org/download/bolero_69/Bolero.mp3">Ravel Bolero</a></li>
+        <!--<li class="active"><a href="http://www.archive.org/download/bolero_69/Bolero.mp3">Ravel Bolero</a></li>-->
         <li ng-repeat="song in songs | filter: search">
           <a href="{{song.audioUrls[0].url}}" ng:click="audioLinkClicked($index, $event)">{{song.name}}</a>
           <!--<a href="#/{{song._id}}">Edit</a>-->
@@ -246,7 +246,6 @@
           {
               $scope.audioSrc = $scope.songs[index].audioUrls.filter(function(audioUrl){return audioUrl.sequence == 1})[0].url
               $scope.activeIndex = index;
-              alert('test');
               $scope.audio[0].load();
               $scope.audio[0].play();
           }
