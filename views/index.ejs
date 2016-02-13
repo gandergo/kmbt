@@ -36,7 +36,7 @@
       Song Writer: <select ng-model="songwriter" ng-options="member.name as member.fbId for member in memberList"></select>
       
       <ul style="display:none">
-        <li ng-repeat="song in songs | filter: search | filter: {songwriter.indexOf(songwriter) > -1}">
+        <li ng-repeat="song in songs | filter: search | hasSongWriter(songwriter)">
           <!--<input type="text" ng-model="song.status">-->
           <a href="#/{{song._id}}">{{song.name}}</a>
         </li>
@@ -113,6 +113,12 @@
                     return $sce.trustAsResourceUrl(val);
                 };
             }])
+        
+        .filter('hasSongWriter', function(songs, member){
+            return songs.filter(function(song){
+                return (song.songwriter.indexOf(member) > -1);
+            });
+        })
       
         //---------------
         // Services
