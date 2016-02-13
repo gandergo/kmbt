@@ -70,7 +70,7 @@
 
     <script type="text/ng-template" id="/songDetails.html">
       <h1>{{ song.name }}</h1><input type="text" ng-model="song.name">
-      <button ng-click="updateSong()">Update</button><a href="#">Back</a>
+      <button ng-click="updateSong()">Update</button><a href="/">Back</a>
       status: <select ng-model="song.status" ng-options="status for status in statusList"></select><br/>
       lyrics: <textarea ng-model="song.lyrics" style="width:70%;height:200px"></textarea>
       <br />
@@ -330,7 +330,8 @@
             }
             
             $scope.refresh = function(){
-                $scope.$apply();
+                window.location.reload();
+                //$scope.$apply();
             };
 
         }])
