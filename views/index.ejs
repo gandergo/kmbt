@@ -30,9 +30,11 @@
 
     <!-- Template -->
     <script type="text/ng-template" id="/songs.html">
-      New Song <input type="text" ng-model="newSong"><button ng-click="save()">Create</button>
-      Search: <input type="text" ng-model="search.name">
-      <select ng-model="" ng-options="status as status for status in statusList"></select>
+      Search: <br />
+      Name: <input type="text" ng-model="search.name">
+      Status: <select ng-model="search.status" ng-options="status as status for status in statusList"></select>
+      Composer: <select ng-model="search.songwriter" ng-options="member.name as member.fbId for member in memberList"></select>
+      
       <ul style="display:none">
         <li ng-repeat="song in songs | filter: search">
           <!--<input type="text" ng-model="song.status">-->
@@ -59,7 +61,9 @@
         <li><a href="http://www.archive.org/download/CanonInD_261/CanoninD.mp3">Canon in D Pachabel</a></li>
         <li><a href="http://www.archive.org/download/PatrikbkarlChamberSymph/PatrikbkarlChamberSymph_vbr_mp3.zip">patrikbkarl chamber symph</a></li>
         -->
-    </ul>
+    </ul
+    
+    New Song: <input type="text" ng-model="newSong"><button ng-click="save()">Create</button>
       
     </script>
 
@@ -142,14 +146,19 @@
             return $http.get('/songs/statusList/list');
         }])
         
+        .factory('MemberList', function(){
+           return [{name: "Chris", fbId: "509846744"}, {name: "Germing", fbId: "564940779"}, {name: "Iris", fbId: "516014768"}, {name: "NgauNam", fbId: "659440430"}, {name: "Tommy", fbId: "660440533"}]; 
+        })
+        
         
         //---------------
         // Controllers
         //---------------
 
-        .controller('SongController', ['$scope', 'Songs', 'StatusList', function ($scope, Songs, StatusList) {
+        .controller('SongController', ['$scope', 'Songs', 'StatusList', "MemberList", function ($scope, Songs, StatusList, MemberList) {
           $scope.editing = [];
           $scope.songs = Songs.query();
+          $scope.memberList = MemberList;
           //$scope.statusList = StatusList;
           
           StatusList.then(
@@ -157,7 +166,8 @@
                     // this callback will be called asynchronously
                     // when the response is available.
                     //console.log('todos: ', data );
-                    $scope.statusList = response.data
+                    response.data.unshift("");
+                    $scope.statusList = response.data;
                 }, function errorCallback(response) {
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.
@@ -323,6 +333,7 @@
                     // this callback will be called asynchronously
                     // when the response is available.
                     //console.log('todos: ', data );
+                    response.data.unshift("");
                     $scope.statusList = response.data
                 }, function errorCallback(response) {
                     // called asynchronously if an error occurs
