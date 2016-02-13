@@ -230,7 +230,7 @@
               $scope.audio = document.getElementsByTagName('audio');
               len = $scope.songs.length;
               
-              document.getElementsByTagName('audio')[0].addEventListener('ended',function(e){
+              $scope.audio[0].addEventListener('ended',function(e){
                 $scope.activeIndex++;
                 if($scope.activeIndex == len){
                     $scope.activeIndex = 0;
@@ -246,6 +246,9 @@
           {
               $scope.audioSrc = $scope.songs[index].audioUrls.filter(function(audioUrl){return audioUrl.sequence == 1})[0].url
               $scope.activeIndex = index;
+              alert('test');
+              $scope.audio[0].load();
+              $scope.audio[0].play();
           }
           
           $scope.audioLinkClicked = function(index, event){
