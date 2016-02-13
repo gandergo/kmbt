@@ -33,10 +33,10 @@
       Search: <br />
       Name: <input type="text" ng-model="search.name">
       Status: <select ng-model="search.status" ng-options="status as status for status in statusList"></select>
-      Composer: <select ng-model="search.songwriter" ng-options="member.name as member.fbId for member in memberList"></select>
+      Song Writer: <select ng-model="songwriter" ng-options="member.name as member.fbId for member in memberList"></select>
       
       <ul style="display:none">
-        <li ng-repeat="song in songs | filter: search">
+        <li ng-repeat="song in songs | filter: {search && song.songwriter.indexOf(songwriter) > -1}">
           <!--<input type="text" ng-model="song.status">-->
           <a href="#/{{song._id}}">{{song.name}}</a>
         </li>
