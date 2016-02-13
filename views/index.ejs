@@ -33,7 +33,7 @@
       Search: <br />
       Name: <input type="text" ng-model="search.name">
       Status: <select ng-model="search.status" ng-options="status as status for status in statusList"></select>
-      Song Writer: <select ng-model="songwriter" ng-options="member.name as member.fbId for member in memberList"></select>
+      Song Writer: <select ng-model="songwriter" ng-options="member.fbId as member.name for member in memberList"></select>
       
       <ul style="display:none">
         <li ng-repeat="song in songs | filter: search | filter:hasSongWriter()">
@@ -324,6 +324,7 @@
             $scope.hasSongwriter = function()
             {
                 return function(song) {
+                    alert($scope.songwriter);
                 return (song.songwriter.indexOf($scope.songwriter) > -1);
                 };
             }
