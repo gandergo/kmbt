@@ -249,7 +249,8 @@
               //$scope.audioSrc = $scope.songs[index].audioUrls.filter(function(audioUrl){return audioUrl.sequence == 1})[0].url
               $scope.activeIndex = index;
               //alert($scope.audioSrc);
-              //alert($scope.audio[0].src);
+              alert($scope.audio[0].src);
+              alert(index);
               $scope.audio[0].load();
               $scope.audio[0].play();
           }
