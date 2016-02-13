@@ -7,8 +7,8 @@
     #playlist,audio{background:#666;width:400px;padding:20px;}
     .active a{color:#5DB0E6;text-decoration:none;}
     /*li a{color:#eeeedd;background:#333;padding:5px;display:block;}*/
-    li a{color:#eeeedd;background:#333;padding:5px;}
-    li a:hover{text-decoration:none;}    
+    li div {color:#eeeedd;background:#333;padding:5px;}
+    li div a:hover{text-decoration:none;}    
     </style>
   </head>
   <body>
@@ -48,8 +48,10 @@
     <ul id="playlist">
         <!--<li class="active"><a href="http://www.archive.org/download/bolero_69/Bolero.mp3">Ravel Bolero</a></li>-->
         <li ng-repeat="song in songs | filter: search">
+          <div>
           <a href="{{(song.audioUrls | filter: {sequence: 1})[0].url}}" ng:click="audioLinkClicked($index, $event)">{{song.name}}</a>
           <a href="#/{{song._id}}">Edit</a>
+          </div>
         </li>
         <!--<li class="active"><a href="http://www.archive.org/download/bolero_69/Bolero.mp3">Ravel Bolero</a></li>
         <li><a href="http://www.archive.org/download/MoonlightSonata_755/Beethoven-MoonlightSonata.mp3">Moonlight Sonata - Beethoven</a></li>
