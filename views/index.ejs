@@ -176,7 +176,7 @@
         // Controllers
         //---------------
 
-        .controller('SongController', ['$scope', 'Songs', 'StatusList', "MemberList", function ($scope, Songs, StatusList, MemberList) {
+        .controller('SongController', ['$scope', '$filter', 'Songs', 'StatusList', "MemberList", function ($scope, $filter, Songs, StatusList, MemberList) {
           $scope.editing = [];
           $scope.songs = Songs.query();
           $scope.memberList = MemberList;
