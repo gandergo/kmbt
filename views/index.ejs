@@ -54,9 +54,9 @@
         <source type="audio/mp3" src="{{songs[activeIndex].audioUrls[0].url | trustAsResourceUrl}}">
         Sorry, your browser does not support HTML5 audio.
     </audio>-->
-    <span ng-bind="(songs | filter: search | involveMember:'songwriter':songwriter | involveMember: 'lyricswriter':lyricswriter | involveMember: 'singer':singer).length"></span>
+    <span ng-bind="(songs | filter: search | involveMember:'songwriter':songwriter | involveMember: 'lyricswriter':lyricswriter | involveMember: 'singer':singer).length"></span> songs
     <br/>
-    <audio id="audio" ng-src="{{(songs[activeIndex].audioUrls | filter: {sequence: 1})[0].url + '?raw=1' | trustAsResourceUrl}}" autoplay controls></audio>
+    <audio id="audio" ng-src="{{((songs | filter: search | involveMember:'songwriter':songwriter | involveMember: 'lyricswriter':lyricswriter | involveMember: 'singer':singer)[activeIndex].audioUrls | filter: {sequence: 1})[0].url + '?raw=1' | trustAsResourceUrl}}" autoplay controls></audio>
     <ul id="playlist">
         <!--<li class="active"><a href="http://www.archive.org/download/bolero_69/Bolero.mp3">Ravel Bolero</a></li>-->
         <li ng-repeat="song in songs | filter: search | involveMember:'songwriter':songwriter | involveMember: 'lyricswriter':lyricswriter | involveMember: 'singer':singer">
@@ -266,7 +266,12 @@
           function initPlayer(){
               $scope.activeIndex = 0;
               $scope.audio = document.getElementsByTagName('audio');
-              len = $scope.songs.length;
+              //len = $scope.songs.length;
+              var filteredSongs = $filter("search")($scope.song);
+              filteredSongs = $filter("involveMember")(filteredSongs,"songwriter",$scope.songwriter);
+              filteredSongs = $filter("involveMember")(filteredSongs,"lyricswriter",$scope.lyricswriter);
+              filteredSongs = $filter("involveMember")(filteredSongs,"singer",$scope.singer);
+              len = filteredSongs.length;
               
               $scope.audio[0].addEventListener('ended',function(e){
                 $scope.activeIndex++;
