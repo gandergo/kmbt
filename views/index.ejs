@@ -37,7 +37,8 @@
       <button ng-click="refresh()">Refresh</button>
       Search: <br />
       Name: <input type="text" ng-model="search.name">
-      Status: <select ng-model="search.status" ng-options="status as status for status in statusList"><option text="" value=""></option></select>
+      Status: <select ng-model="search.status" ng-options="status as status for status in statusList"><option text="" value=""></option></select><br/>
+      Lyrics: <input type="text" ng-model="search.lyrics"><br/>
       Song Writer: <select ng-model="songwriter" ng-options="member.fbId as member.name for member in memberList"><option text="" value=""></option></select>
       Lyrics Writer: <select ng-model="lyricswriter" ng-options="member.fbId as member.name for member in memberList"><option text="" value=""></option></select>
       Singer: <select ng-model="singer" ng-options="member.fbId as member.name for member in memberList"><option text="" value=""></option></select>
