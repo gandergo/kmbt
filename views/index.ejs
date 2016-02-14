@@ -37,10 +37,10 @@
       <button ng-click="refresh()">Refresh</button>
       Search: <br />
       Name: <input type="text" ng-model="search.name">
-      Status: <select ng-model="search.status" ng-options="status as status for status in statusList"><option value=""></option></select>
-      Song Writer: <select ng-model="songwriter" ng-options="member.fbId as member.name for member in memberList"><option value=""></option></select>
-      Lyrics Writer: <select ng-model="lyricswriter" ng-options="member.fbId as member.name for member in memberList"><option value=""></option></select>
-      Singer: <select ng-model="singer" ng-options="member.fbId as member.name for member in memberList"><option value=""></option></select>
+      Status: <select ng-model="search.status" ng-options="status as status for status in statusList"><option text="" value=""></option></select>
+      Song Writer: <select ng-model="songwriter" ng-options="member.fbId as member.name for member in memberList"><option text="" value=""></option></select>
+      Lyrics Writer: <select ng-model="lyricswriter" ng-options="member.fbId as member.name for member in memberList"><option text="" value=""></option></select>
+      Singer: <select ng-model="singer" ng-options="member.fbId as member.name for member in memberList"><option text="" value=""></option></select>
       
       <ul style="display:none">
         <li ng-repeat="song in songs | filter: search | filter:hasSongWriter">
@@ -54,12 +54,12 @@
         <source type="audio/mp3" src="{{songs[activeIndex].audioUrls[0].url | trustAsResourceUrl}}">
         Sorry, your browser does not support HTML5 audio.
     </audio>-->
-    <span ng-bind="songs.length"></span>
+    <span ng-bind="(songs | filter: search | involveMember:'songwriter':songwriter | involveMember: 'lyricswriter':lyricswriter | involveMember: 'singer':singer).length"></span>
     <br/>
-    <audio id="audio" preload="auto" ng-src="{{(songs[activeIndex].audioUrls | filter: {sequence: 1})[0].url + '?raw=1' | trustAsResourceUrl}}"  controls></audio>
+    <audio id="audio" ng-src="{{(songs[activeIndex].audioUrls | filter: {sequence: 1})[0].url + '?raw=1' | trustAsResourceUrl}}" autoplay controls></audio>
     <ul id="playlist">
         <!--<li class="active"><a href="http://www.archive.org/download/bolero_69/Bolero.mp3">Ravel Bolero</a></li>-->
-        <li ng-repeat="song in songs | involveMember:'songwriter':songwriter | involveMember: 'lyricswriter':lyricswriter | involveMember: 'singer':singer">
+        <li ng-repeat="song in songs | filter: search | involveMember:'songwriter':songwriter | involveMember: 'lyricswriter':lyricswriter | involveMember: 'singer':singer">
           <div ng-class="{active: $index == activeIndex}">
           <a href="{{(song.audioUrls | filter: {sequence: 1})[0].url}}" ng:click="audioLinkClicked($index, $event)">{{song.name}}</a>
           <a class="editButton" href="#/{{song._id}}">Edit</a>
