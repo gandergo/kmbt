@@ -285,7 +285,8 @@
               //alert($scope.audioSrc);
               //alert($scope.audio[0].src);
               //alert(index);
-              $scope.audio[0].src  = $scope.songs[index].audioUrls.filter(function(audioUrl){return audioUrl.sequence == 1})[0].url + '?raw=1';
+              //$scope.audio[0].src  = $scope.songs[index].audioUrls.filter(function(audioUrl){return audioUrl.sequence == 1})[0].url + '?raw=1';
+              $scope.$digest()
               $scope.audio[0].load();
               $scope.audio[0].play();
           }
