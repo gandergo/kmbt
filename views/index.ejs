@@ -60,7 +60,7 @@
           <a href="{{(song.audioUrls | filter: {sequence: 1})[0].url}}" ng:click="audioLinkClicked($index, $event)">{{song.name}}</a>
           <a class="editButton" href="#/{{song._id}}">Edit</a>
           </div>
-          <div ng-model="song.lyrics" ng-show="$index == activeIndex"></div>
+          <div ng-bind="song.lyrics" ng-show="$index == activeIndex"></div>
         </li>
         <!--<li class="active"><a href="http://www.archive.org/download/bolero_69/Bolero.mp3">Ravel Bolero</a></li>
         <li><a href="http://www.archive.org/download/MoonlightSonata_755/Beethoven-MoonlightSonata.mp3">Moonlight Sonata - Beethoven</a></li>
