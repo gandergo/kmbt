@@ -54,7 +54,9 @@
         <source type="audio/mp3" src="{{songs[activeIndex].audioUrls[0].url | trustAsResourceUrl}}">
         Sorry, your browser does not support HTML5 audio.
     </audio>-->
-    <audio id="audio" ng-src="{{(songs[activeIndex].audioUrls | filter: {sequence: 1})[0].url + '?raw=1' | trustAsResourceUrl}}"  controls></audio>
+    <span ng-bind="songs.length"></span>
+    <br/>
+    <audio id="audio" preload="auto" ng-src="{{(songs[activeIndex].audioUrls | filter: {sequence: 1})[0].url + '?raw=1' | trustAsResourceUrl}}"  controls></audio>
     <ul id="playlist">
         <!--<li class="active"><a href="http://www.archive.org/download/bolero_69/Bolero.mp3">Ravel Bolero</a></li>-->
         <li ng-repeat="song in songs | involveMember:'songwriter':songwriter | involveMember: 'lyricswriter':lyricswriter | involveMember: 'singer':singer">
