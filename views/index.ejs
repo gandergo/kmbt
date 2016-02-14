@@ -8,7 +8,8 @@
     /*.active a {color:#5DB0E6;text-decoration:none;*/
     .active {background-color:lightgreen;}
     /*li a{color:#eeeedd;background:#333;padding:5px;display:block;}*/
-    playlist li {list-style-type: none;}
+    #playlist li {list-style-type: none;}
+    #playlist {padding: 0; margin-top:0}
     li div {color:#eeeedd;background:#333;padding:5px;}
     li div a:hover{text-decoration:none;}    
     </style>
@@ -25,7 +26,8 @@
     
     <script type="text/javascript">
         if (window.location.hash && window.location.hash == '#_=_') {
-            window.location.hash = '';
+            //window.location.hash = '';
+            history.replaceState(undefined, undefined, '');
         }
     </script>
 
