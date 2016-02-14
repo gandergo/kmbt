@@ -39,6 +39,8 @@
       Name: <input type="text" ng-model="search.name">
       Status: <select ng-model="search.status" ng-options="status as status for status in statusList"></select>
       Song Writer: <select ng-model="songwriter" ng-options="member.fbId as member.name for member in memberList"></select>
+      Lyrics Writer: <select ng-model="lyricswriter" ng-options="member.fbId as member.name for member in memberList"></select>
+      Singer: <select ng-model="singer" ng-options="member.fbId as member.name for member in memberList"></select>
       
       <ul style="display:none">
         <li ng-repeat="song in songs | filter: search | filter:hasSongWriter">
@@ -55,7 +57,7 @@
     <audio id="audio" ng-src="{{(songs[activeIndex].audioUrls | filter: {sequence: 1})[0].url + '?raw=1' | trustAsResourceUrl}}"  controls></audio>
     <ul id="playlist">
         <!--<li class="active"><a href="http://www.archive.org/download/bolero_69/Bolero.mp3">Ravel Bolero</a></li>-->
-        <li ng-repeat="song in songs | filter: search | hasSongWriter:songwriter">
+        <li ng-repeat="song in songs | filter: search | involveMember:'songwriter':songwriter | involveMember: 'lyricswriter':lyricswriter | involveMember: 'singer':singer">
           <div ng-class="{active: $index == activeIndex}">
           <a href="{{(song.audioUrls | filter: {sequence: 1})[0].url}}" ng:click="audioLinkClicked($index, $event)">{{song.name}}</a>
           <a class="editButton" href="#/{{song._id}}">Edit</a>
@@ -120,10 +122,13 @@
                 };
             }])
         
-        .filter('hasSongWriter', function(){
-            return function(songs, member){
+        .filter('involveMember', function(){
+            return function(songs, involveType, member){
+                if(member == "")    return songs;
                 return songs.filter(function(song) {
-                    return $scope.songwriter == "" || (song.songwriter.indexOf($scope.songwriter) > -1);
+                        return ((involveType == "songwriter" && song.songwriter.indexOf(member) > -1) 
+                            || (involveType == "lyricswriter" && song.lyricswriter.indexOf(member) > -1)
+                            || (involveType == "singer" && song.singer.indexOf(member) > -1));
                     });
             };
         })
