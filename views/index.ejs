@@ -126,7 +126,7 @@
         
         .filter('involveMember', function(){
             return function(songs, involveType, member){
-                if(member == "")    return songs;
+                if(member == "" || member == null)    return songs;
                 return songs.filter(function(song) {
                         return ((involveType == "songwriter" && song.songwriter.indexOf(member) > -1) 
                             || (involveType == "lyricswriter" && song.lyricswriter.indexOf(member) > -1)
