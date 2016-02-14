@@ -60,7 +60,7 @@
           <a href="{{(song.audioUrls | filter: {sequence: 1})[0].url}}" ng:click="audioLinkClicked($index, $event)">{{song.name}}</a>
           <a class="editButton" href="#/{{song._id}}">Edit</a>
           </div>
-          <div ng-bind="song.lyrics" ng-show="$index == activeIndex"></div>
+          <div ng-bind="song.lyrics | replaceLineBreak" ng-show="$index == activeIndex"></div>
         </li>
         <!--<li class="active"><a href="http://www.archive.org/download/bolero_69/Bolero.mp3">Ravel Bolero</a></li>
         <li><a href="http://www.archive.org/download/MoonlightSonata_755/Beethoven-MoonlightSonata.mp3">Moonlight Sonata - Beethoven</a></li>
@@ -121,12 +121,17 @@
             }])
         
         .filter('hasSongWriter', function(){
-            return function(songs, member)
-            {
-                return songs.filter(function(song){
-                    return member == "" || (song.songwriter.indexOf(member) > -1);
+            return function(songs, member){
+                return songs.filter(function(song) {
+                    return $scope.songwriter == "" || (song.songwriter.indexOf($scope.songwriter) > -1);
                     });
             };
+        })
+        
+        .filter('replaceLineBreak', function() {
+            return function(input){
+                return input.replace(/\n/g, '<br>');
+            }
         })
       
         //---------------
