@@ -43,7 +43,7 @@
       Singer: <select ng-model="singer" ng-options="member.fbId as member.name for member in memberList"><option text="" value=""></option></select>
       
       <ul style="display:none">
-        <li ng-repeat="song in songs | filter: {search || search.status == ''} | filter:hasSongWriter">
+        <li ng-repeat="song in songs | filter: search | filter:hasSongWriter">
           <!--<input type="text" ng-model="song.status">-->
           <a href="#/{{song._id}}">{{song.name}}</a>
         </li>
@@ -54,12 +54,12 @@
         <source type="audio/mp3" src="{{songs[activeIndex].audioUrls[0].url | trustAsResourceUrl}}">
         Sorry, your browser does not support HTML5 audio.
     </audio>-->
-    <span ng-bind="(songs | filter: {search || search.status == ''} | involveMember:'songwriter':songwriter | involveMember: 'lyricswriter':lyricswriter | involveMember: 'singer':singer).length"></span> songs
+    <span ng-bind="(songs | filter: search | involveMember:'songwriter':songwriter | involveMember: 'lyricswriter':lyricswriter | involveMember: 'singer':singer).length"></span> songs
     <br/>
-    <audio id="audio" ng-src="{{((songs | filter: {search || search.status == ''} | involveMember:'songwriter':songwriter | involveMember: 'lyricswriter':lyricswriter | involveMember: 'singer':singer)[activeIndex].audioUrls | filter: {sequence: 1})[0].url + '?raw=1' | trustAsResourceUrl}}" controls></audio>
+    <audio id="audio" ng-src="{{((songs | filter: search | involveMember:'songwriter':songwriter | involveMember: 'lyricswriter':lyricswriter | involveMember: 'singer':singer)[activeIndex].audioUrls | filter: {sequence: 1})[0].url + '?raw=1' | trustAsResourceUrl}}" controls></audio>
     <ul id="playlist">
         <!--<li class="active"><a href="http://www.archive.org/download/bolero_69/Bolero.mp3">Ravel Bolero</a></li>-->
-        <li ng-repeat="song in songs | filter: {search || search.status == ''} | involveMember:'songwriter':songwriter | involveMember: 'lyricswriter':lyricswriter | involveMember: 'singer':singer">
+        <li ng-repeat="song in songs | filter: search | involveMember:'songwriter':songwriter | involveMember: 'lyricswriter':lyricswriter | involveMember: 'singer':singer">
           <div ng-class="{active: $index == activeIndex}">
           <a href="{{(song.audioUrls | filter: {sequence: 1})[0].url}}" ng:click="audioLinkClicked($index, $event)">{{song.name}}</a>
           <a class="editButton" href="#/{{song._id}}">Edit</a>
@@ -268,8 +268,7 @@
               $scope.audio = document.getElementsByTagName('audio');
               //len = $scope.songs.length;
               //var filteredSongs = $filter("search")($scope.song);
-              var filteredSongs = $scope.songs;
-              filteredSongs = $filter("involveMember")(filteredSongs,"songwriter",$scope.songwriter);
+              var filteredSongs = $filter("involveMember")($scope.songs,"songwriter",$scope.songwriter);
               filteredSongs = $filter("involveMember")(filteredSongs,"lyricswriter",$scope.lyricswriter);
               filteredSongs = $filter("involveMember")(filteredSongs,"singer",$scope.singer);
               len = filteredSongs.length;
