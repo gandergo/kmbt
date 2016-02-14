@@ -267,7 +267,7 @@
               $scope.activeIndex = 0;
               $scope.audio = document.getElementsByTagName('audio');
               //len = $scope.songs.length;
-              var filteredSongs = $filter("search")($scope.song);
+              //var filteredSongs = $filter("search")($scope.song);
               filteredSongs = $filter("involveMember")(filteredSongs,"songwriter",$scope.songwriter);
               filteredSongs = $filter("involveMember")(filteredSongs,"lyricswriter",$scope.lyricswriter);
               filteredSongs = $filter("involveMember")(filteredSongs,"singer",$scope.singer);
