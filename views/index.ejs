@@ -12,6 +12,7 @@
     #playlist {padding: 0; margin-top:0}
     li div {color:#eeeedd;background:#333;padding:5px;}
     li div a:hover{text-decoration:none;}    
+    a.editButton {float:right;}
     </style>
   </head>
   <body>
@@ -57,8 +58,9 @@
         <li ng-repeat="song in songs | filter: search | hasSongWriter:songwriter">
           <div ng-class="{active: $index == activeIndex}">
           <a href="{{(song.audioUrls | filter: {sequence: 1})[0].url}}" ng:click="audioLinkClicked($index, $event)">{{song.name}}</a>
-          <a href="#/{{song._id}}">Edit</a>
+          <a class="editButton" href="#/{{song._id}}">Edit</a>
           </div>
+          <div ng-model="song.lyrics" ng-show="{$index == activeIndex}"></div>
         </li>
         <!--<li class="active"><a href="http://www.archive.org/download/bolero_69/Bolero.mp3">Ravel Bolero</a></li>
         <li><a href="http://www.archive.org/download/MoonlightSonata_755/Beethoven-MoonlightSonata.mp3">Moonlight Sonata - Beethoven</a></li>
