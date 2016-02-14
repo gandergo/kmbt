@@ -57,7 +57,7 @@
     <audio id="audio" ng-src="{{(songs[activeIndex].audioUrls | filter: {sequence: 1})[0].url + '?raw=1' | trustAsResourceUrl}}"  controls></audio>
     <ul id="playlist">
         <!--<li class="active"><a href="http://www.archive.org/download/bolero_69/Bolero.mp3">Ravel Bolero</a></li>-->
-        <li ng-repeat="song in songs | filter: search | involveMember:'songwriter':songwriter | involveMember: 'lyricswriter':lyricswriter | involveMember: 'singer':singer">
+        <li ng-repeat="song in songs | involveMember:'songwriter':songwriter | involveMember: 'lyricswriter':lyricswriter | involveMember: 'singer':singer">
           <div ng-class="{active: $index == activeIndex}">
           <a href="{{(song.audioUrls | filter: {sequence: 1})[0].url}}" ng:click="audioLinkClicked($index, $event)">{{song.name}}</a>
           <a class="editButton" href="#/{{song._id}}">Edit</a>
