@@ -274,6 +274,7 @@
                 }else{
                     //link = $scope.playlist.find('a')[$scope.current];    
                 }
+                $scope.$digest();     //http://stackoverflow.com/questions/11873627/angularjs-ng-model-binding-not-updating-when-changed-with-jquery
                 playAudio($scope.activeIndex);
               });
           };
@@ -286,7 +287,6 @@
               //alert($scope.audio[0].src);
               //alert(index);
               //$scope.audio[0].src  = $scope.songs[index].audioUrls.filter(function(audioUrl){return audioUrl.sequence == 1})[0].url + '?raw=1';
-              $scope.$digest();     //http://stackoverflow.com/questions/11873627/angularjs-ng-model-binding-not-updating-when-changed-with-jquery
               $scope.audio[0].load();
               $scope.audio[0].play();
           }
