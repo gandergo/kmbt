@@ -37,10 +37,10 @@
       <button ng-click="refresh()">Refresh</button>
       Search: <br />
       Name: <input type="text" ng-model="search.name">
-      Status: <select ng-model="search.status" ng-options="status as status for status in statusList"></select>
-      Song Writer: <select ng-model="songwriter" ng-options="member.fbId as member.name for member in memberList"><option value="">*</option></select>
-      Lyrics Writer: <select ng-model="lyricswriter" ng-options="member.fbId as member.name for member in memberList"><option value="">*</option></select>
-      Singer: <select ng-model="singer" ng-options="member.fbId as member.name for member in memberList"><option value="">*</option></select>
+      Status: <select ng-model="search.status" ng-options="status as status for status in statusList"><option value=""></option></select>
+      Song Writer: <select ng-model="songwriter" ng-options="member.fbId as member.name for member in memberList"><option value=""></option></select>
+      Lyrics Writer: <select ng-model="lyricswriter" ng-options="member.fbId as member.name for member in memberList"><option value=""></option></select>
+      Singer: <select ng-model="singer" ng-options="member.fbId as member.name for member in memberList"><option value=""></option></select>
       
       <ul style="display:none">
         <li ng-repeat="song in songs | filter: search | filter:hasSongWriter">
@@ -78,7 +78,7 @@
     <script type="text/ng-template" id="/songDetails.html">
       <h1>{{ song.name }}</h1><input type="text" ng-model="song.name">
       <button ng-click="updateSong()">Update</button><button onclick="window.location = '/'">Back</button>
-      status: <select ng-model="song.status" ng-options="status for status in statusList"></select><br/>
+      status: <select ng-model="song.status" ng-options="status for status in statusList"><option value=""></option></select><br/>
       lyrics: <textarea ng-model="song.lyrics" style="width:70%;height:200px"></textarea>
       <br />
       <a href="{{song.folderUrl | trustAsResourceUrl}}">Resource Folder</a>
@@ -185,7 +185,7 @@
                     // this callback will be called asynchronously
                     // when the response is available.
                     //console.log('todos: ', data );
-                    response.data.unshift(null);
+                    //response.data.unshift(null);
                     $scope.statusList = response.data;
                 }, function errorCallback(response) {
                     // called asynchronously if an error occurs
@@ -365,7 +365,7 @@
                     // this callback will be called asynchronously
                     // when the response is available.
                     //console.log('todos: ', data );
-                    response.data.unshift(null);
+                    //response.data.unshift(null);
                     $scope.statusList = response.data
                 }, function errorCallback(response) {
                     // called asynchronously if an error occurs
