@@ -12,7 +12,7 @@
     #playlist {padding: 0; margin-top:0}
     li div {color:#eeeedd;background:#333;padding:5px;}
     li div a:hover{text-decoration:none;}    
-    a.editButton {float:right;}
+    span.editButton {float:right;}
     </style>
   </head>
   <body>
@@ -63,7 +63,11 @@
         <li ng-repeat="song in songs | filter: search | involveMember:'songwriter':songwriter | involveMember: 'lyricswriter':lyricswriter | involveMember: 'singer':singer">
           <div ng-class="{active: $index == activeIndex}">
           <a href="{{(song.audioUrls | filter: {sequence: 1})[0].url}}" ng:click="audioLinkClicked($index, $event)">{{song.name}}</a>
-          <a class="editButton" href="#/{{song._id}}">Edit</a>
+          <span class="editButton">
+            <a href="{{(song.audioUrls | filter: {sequence: 1})[0].url + '?dl=1'}}">Download</a>
+            <a href="{{song.folderUrl}}">Dropbox</a>
+            <a href="#/{{song._id}}">Edit</a>
+          </span>
           </div>
           <div style="white-space: pre;" ng-bind="song.lyrics" ng-show="$index == activeIndex"></div>
         </li>
