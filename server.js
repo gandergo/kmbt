@@ -139,9 +139,9 @@ var SampleApp = function() {
         
         //passport init
         passport.use(new FacebookStrategy({
-                clientID: '382800951750696',
-                clientSecret: '887a9cf6f817ab78d822881647d32447',
-                callbackURL: "http://kmb-kmb.a3c1.starter-us-west-1.openshiftapps.com/auth/facebook/callback",
+                clientID: FB_APP_ID,
+                clientSecret: FB_SECRET,
+                callbackURL: FB_CALLBACK,
                 //passReqToCallback : true,
                 //profileFields: ['id', 'emails', 'name'] 
                 //profileFields: ['emails'] 
