@@ -141,7 +141,7 @@ var SampleApp = function() {
         passport.use(new FacebookStrategy({
                 clientID: '382800951750696',
                 clientSecret: '887a9cf6f817ab78d822881647d32447',
-                callbackURL: "https://kmb-kmbgroup.rhcloud.com/auth/facebook/callback",
+                callbackURL: "http://kmb-kmb.a3c1.starter-us-west-1.openshiftapps.com/auth/facebook/callback",
                 //passReqToCallback : true,
                 //profileFields: ['id', 'emails', 'name'] 
                 //profileFields: ['emails'] 
