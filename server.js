@@ -139,9 +139,9 @@ var SampleApp = function() {
         
         //passport init
         passport.use(new FacebookStrategy({
-                clientID: FB_APP_ID,
-                clientSecret: FB_SECRET,
-                callbackURL: FB_CALLBACK,
+                clientID: process.env.FB_APP_ID,
+                clientSecret: process.env.FB_SECRET,
+                callbackURL: process.env.FB_CALLBACK,
                 //passReqToCallback : true,
                 //profileFields: ['id', 'emails', 'name'] 
                 //profileFields: ['emails'] 
