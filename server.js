@@ -274,6 +274,8 @@ var SampleApp = function() {
             url = process.env.OPENSHIFT_MONGODB_DB_URL +
             process.env.OPENSHIFT_APP_NAME;
         }
+		
+		console.log('url = ', url);
 
         var mongoose = require('mongoose');
         mongoose.connect(url, function(err) {
