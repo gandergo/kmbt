@@ -278,7 +278,7 @@ var SampleApp = function() {
 		console.log('url = ', url);
 
         var mongoose = require('mongoose');
-        mongoose.connect(url, function(err) {
+        mongoose.connect(url, , { user: process.env.OPENSHIFT_MONGODB_DB_USER, pass: process.env.OPENSHIFT_MONGODB_DB_PASS}, function(err) {
             if(err) {
                 console.log('connection error', err);
             } else {
