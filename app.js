@@ -8,7 +8,7 @@ var path = require('path');
 var routes = require('./routes/index');
 var songs = require('./routes/songs');
 
-var url = 'mongodb://localhost/kmbApp';
+var url = process.env.MONGO_URL;
 
 // if OPENSHIFT env variables are present, use the available connection info:
 if (process.env.OPENSHIFT_MONGODB_DB_URL) {

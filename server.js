@@ -267,7 +267,7 @@ var SampleApp = function() {
         app.use('/songs', songs);
         
         // Database connections
-        var url = 'mongodb://localhost/kmbApp';
+        var url = process.env.MONGO_URL;
 
         // if OPENSHIFT env variables are present, use the available connection info:
         if (process.env.OPENSHIFT_MONGODB_DB_URL) {
