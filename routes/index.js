@@ -26,7 +26,10 @@ router.get('/red', function(req, res){
       //   console.log('BODY: ' + chunk);
       // });
     });
+
+    res.status(200).send('');
   }
+  res.status(500).send('Error');
 })
 
 module.exports = router;

@@ -139,9 +139,9 @@ var SampleApp = function() {
         
         //passport init
         passport.use(new FacebookStrategy({
-                clientID: process.env.FB_APP_ID,
-                clientSecret: process.env.FB_SECRET,
-                callbackURL: process.env.FB_CALLBACK,
+            clientID: process.env.FB_APP_ID,
+            clientSecret: process.env.FB_SECRET,
+            callbackURL: process.env.FB_CALLBACK,
                 //passReqToCallback : true,
                 //profileFields: ['id', 'emails', 'name'] 
                 //profileFields: ['emails'] 
@@ -236,6 +236,9 @@ var SampleApp = function() {
                 return next();
             }
             else{
+                if(req.url == process.env.BYPASS_PATH) {
+                    return next();
+                }
                 return res.redirect('/auth/facebook');
             }
         });
