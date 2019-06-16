@@ -8,28 +8,35 @@ router.get('/', function(req, res) {
 });
 
 router.get('/red', function(req, res){
-  if(typeof process.env.RED_URL !== 'undefined') {
-    var https = require('https');
+  try {
+    if(typeof process.env.RED_HOST !== 'undefined') {
+      var https = require('https');
 
-    var options = {
-      host: process.env.RED_URL,
-      port: 443,
-      path: '/',
-      method: 'GET'
-    };
+      var options = {
+        host: process.env.RED_HOST,
+        port: 443,
+        path: '/',
+        method: 'GET'
+      };
 
-    var req = https.request(options, function(res) {
-      // console.log('STATUS: ' + res.statusCode);
-      // console.log('HEADERS: ' + JSON.stringify(res.headers));
-      // res.setEncoding('utf8');
-      // res.on('data', function (chunk) {
-      //   console.log('BODY: ' + chunk);
-      // });
-    });
-
-    res.status(200).send('');
+      var req = https.request(options, function(res) {
+        // console.log('STATUS: ' + res.statusCode);
+        // console.log('HEADERS: ' + JSON.stringify(res.headers));
+        // res.setEncoding('utf8');
+        // res.on('data', function (chunk) {
+        //   console.log('BODY: ' + chunk);
+        // });
+        res.status(200).send('');
+      });
+    }
+    else {
+      res.status(500).send('Error');
+    }
   }
-  res.status(500).send('Error');
+  catch(e) {
+    console.log(e);
+    res.status(500).send('Error');
+  }
 })
 
 module.exports = router;
