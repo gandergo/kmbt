@@ -7,4 +7,26 @@ router.get('/', function(req, res) {
   //res.render('index', { title: 'KMB Songs' });
 });
 
+router.get('/red', function(req, res){
+  if(typeof process.env.RED_URL !== 'undefined') {
+    var https = require('https');
+
+    var options = {
+      host: process.env.RED_URL,
+      port: 443,
+      path: '/',
+      method: 'GET'
+    };
+
+    var req = https.request(options, function(res) {
+      // console.log('STATUS: ' + res.statusCode);
+      // console.log('HEADERS: ' + JSON.stringify(res.headers));
+      // res.setEncoding('utf8');
+      // res.on('data', function (chunk) {
+      //   console.log('BODY: ' + chunk);
+      // });
+    });
+  }
+})
+
 module.exports = router;
